@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 import useTaskManager from '../hooks/useTaskManager';
+import Modal from './Modal';
 import { ReactComponent as Grid } from '../assets/grid.svg';
 import { ReactComponent as List } from '../assets/list.svg';
 import { ReactComponent as Plus } from '../assets/plus.svg';
@@ -8,7 +9,7 @@ import { ReactComponent as Plus } from '../assets/plus.svg';
 import './ViewGridList.scss';
 
 const ViewGridList = () => {
-  const { layout, setLayout, setModal } = useTaskManager();
+  const { layout, setLayout, modal, setModal } = useTaskManager();
 
   const handleSubmitGrid = () => {
     setLayout('grid');
@@ -35,6 +36,8 @@ const ViewGridList = () => {
       <button className="view__button-plus" onClick={handleNewTask}>
         <Plus className="view__icon" />
       </button>
+
+      {modal && <Modal setModal={setModal} />}
     </div>
   );
 };
