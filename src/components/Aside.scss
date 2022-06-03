@@ -1,0 +1,52 @@
+@use '../styles/variables' as v;
+
+.aside__main {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  width: 24rem;
+}
+
+.aside__content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  background-color: v.$neutral-color-4;
+  padding: 1.4rem 0;
+  width: 20rem;
+}
+
+.aside__logo {
+  width: 3.9rem;
+  height: 3.6rem;
+  margin-bottom: 4rem;
+}
+
+.aside__buttons {
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  background-color: transparent;
+  color: v.$neutral-color-2;
+  text-transform: uppercase;
+  margin: 1rem 0;
+  padding: 1rem 2rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.aside__button {
+  margin-right: 1rem;
+}
+
+.active {
+  color: v.$primary-color-4;
+  background: linear-gradient(90deg, rgba(186, 37, 37, 0) 0%, rgba(210, 77, 77, 0.1) 100%);
+  border-right: 0.5rem solid v.$primary-color-4;
+  svg path {
+    fill: v.$primary-color-4;
+  }
+}

@@ -4,6 +4,8 @@ import Aside from './Aside';
 import ViewGridList from './ViewGridList';
 import useTaskManager from '../hooks/useTaskManager';
 
+import './Dashboard.scss';
+
 const Dashboard = () => {
   const { layout } = useTaskManager();
   return (
