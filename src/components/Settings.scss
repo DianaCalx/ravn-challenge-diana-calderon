@@ -1,0 +1,49 @@
+@use '../styles/variables' as v;
+
+.settings{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings__card{
+  width: 30rem;
+  height: 50rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: v.$text-color-1;
+  background-color: v.$neutral-color-3;
+  border-radius: 2rem;
+}
+
+.settings__data{
+  margin: 0.5rem;
+}
+
+.settings__type{
+  margin: 0 0 2rem 0;
+}
+.settings__itials{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 7rem;
+  width: 7rem;
+  border-radius: 50%;
+  background-color: v.$tertiary-color-4;
+  font-weight: bold;
+  font-size: 4rem;
+  color: black;
+  margin: 2rem;
+}
+
+.settings__fullName{
+  color: v.$secondary-color-4;
+  font-size: 2rem;
+  font-weight: bold;
+}
