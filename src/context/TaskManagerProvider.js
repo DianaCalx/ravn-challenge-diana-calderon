@@ -5,6 +5,7 @@ const TaskManagerContext = createContext();
 const TasKManagerProvider = ({ children }) => {
   const [layout, setLayout] = useState('grid');
   const [searchText, setSearchText] = useState('');
+  const [modal, setModal] = useState(false);
 
   return (
     <TaskManagerContext.Provider
@@ -13,6 +14,8 @@ const TasKManagerProvider = ({ children }) => {
         setLayout,
         searchText,
         setSearchText,
+        modal,
+        setModal,
       }}
     >
       {children}
