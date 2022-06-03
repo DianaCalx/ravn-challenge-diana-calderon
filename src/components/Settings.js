@@ -2,15 +2,10 @@ import React from 'react';
 import { splitWords } from '../helpers/splitWords';
 import { getDate } from '../helpers/getAllAboutDate';
 import './Settings.scss';
+import myJson from '../data.json';
 
 const Settings = () => {
-  const user = {
-    fullName: 'Diana Calderon',
-    email: 'calderon.calx@gmail.com',
-    type: 'CANDIDATE',
-    createdAt: '2022-03-08T16:04:54.553Z',
-    updatedAt: '2022-06-01T20:18:40.041Z',
-  };
+  const { user } = myJson;
 
   return (
     <div className="settings">
