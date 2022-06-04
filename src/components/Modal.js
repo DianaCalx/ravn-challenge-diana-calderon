@@ -1,22 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ReactComponent as MoreLess } from '../assets/bell.svg';
 import { ReactComponent as Avatar } from '../assets/human.svg';
+import useTaskManager from '../hooks/useTaskManager';
 import Dropdown from './Dropdown';
 import myJson from '../data.json';
+import estimates from '../helpers/estimates';
 import './Modal.scss';
 
 const Modal = ({ setModal }) => {
   const [mensaje, setMensaje] = useState('');
-  const { estimates, users, tags, status } = myJson;
+  const { users, tags, status } = myJson;
+
+  const { saveTask, taskEdit, setTaskEdit } = useTaskManager();
 
   const [data, setData] = useState({
     name: '',
     estimate: '',
     user: {},
-    label: [],
+    tags: [],
     status: '',
-    due_date: '',
+    dueDate: '',
   });
+
+  useEffect(() => {
+    if (Object.keys(taskEdit).length > 0) {
+      setData({
+        id: taskEdit.id,
+        name: taskEdit.name,
+        estimate: taskEdit.estimate,
+        user: taskEdit.user,
+        tags: taskEdit.tags,
+        status: taskEdit.status,
+        dueDate: taskEdit.dueDate,
+      });
+    }
+  }, []);
 
   const handleChangedata = e => {
     setData({
@@ -25,29 +43,34 @@ const Modal = ({ setModal }) => {
     });
   };
 
+  const hideModal = () => {
+    setModal(false);
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    if ([data.name, data.estimate, data.user, data.label, data.status, data.due_date].includes('')) {
+    if ([data.name, data.estimate, data.user, data.tags, data.status, data.dueDate].includes('')) {
       setMensaje('All fields are required');
       setTimeout(() => {
         setMensaje('');
       }, 3000);
       return;
     }
-    console.log('Saving data');
+
+    if (data.id) {
+      setTaskEdit({});
+    }
+
+    saveTask(data);
 
     setData({
       name: '',
       estimate: '',
       user: '',
-      label: '',
+      tags: '',
       status: '',
-      due_date: '',
+      dueDate: '',
     });
-    setModal(false);
-  };
-
-  const hideModal = () => {
     setModal(false);
   };
 
@@ -67,25 +90,25 @@ const Modal = ({ setModal }) => {
     );
   };
 
-  const LabelOption = ({ option }) => {
+  const tagsOption = ({ option }) => {
     const handleClick = e => {
-      const oldtags = data.label;
+      const oldtags = data.tags;
       if (e.target.checked) {
         setData({
           ...data,
-          label: [...oldtags, option],
+          tags: [...oldtags, option],
         });
       } else {
         setData({
           ...data,
-          label: oldtags.filter(label => label !== option),
+          tags: oldtags.filter(tags => tags !== option),
         });
       }
     };
     return (
       <div>
-        <input id={option} type="checkbox" value={option} onChange={handleClick} checked={data.label.includes(option)} />
-        <label className="checkbox__label" htmlFor={option}>
+        <input id={option} type="checkbox" value={option} onChange={handleClick} checked={data.tags.includes(option)} />
+        <label className="checkbox__tags" htmlFor={option}>
           {option}
         </label>
       </div>
@@ -109,7 +132,7 @@ const Modal = ({ setModal }) => {
 
   return (
     <div className="modal">
-      <form className="modal__form" onSubmit={handleSubmit}>
+      <form className="modal__form" onSubmit={e => handleSubmit(e)}>
         <div className="modal__rec">
           <input name="name" type="text" placeholder="Task title" className="modal__input" value={data.name} onChange={e => handleChangedata(e)} />
           <div className="modal__options">
@@ -137,10 +160,10 @@ const Modal = ({ setModal }) => {
             />
             <Dropdown
               options={tags}
-              OptionComponent={LabelOption}
+              OptionComponent={tagsOption}
               trigger={
                 <div className="modal__dropdown__trigger">
-                  <span>{data.label.includes(tags) || 'Label'}</span>
+                  <span>{data.tags.includes(tags) || 'Label'}</span>
                 </div>
               }
               disabledOption="Tag Title"
@@ -155,7 +178,7 @@ const Modal = ({ setModal }) => {
                 </option>
               ))}
             </select>
-            <input className="modal__date" type="date" name="due_date" value={data.due_date} onChange={e => handleChangedata(e)} />
+            <input className="modal__date" type="date" name="dueDate" value={data.dueDate} onChange={e => handleChangedata(e)} />
           </div>
           <div className="modal__buttons">
             <button type="button" onClick={hideModal} className="modal__close">

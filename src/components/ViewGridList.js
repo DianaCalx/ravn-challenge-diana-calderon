@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames/bind';
 import useTaskManager from '../hooks/useTaskManager';
 import Modal from './Modal';
@@ -9,7 +9,7 @@ import { ReactComponent as Plus } from '../assets/plus.svg';
 import './ViewGridList.scss';
 
 const ViewGridList = () => {
-  const { layout, setLayout, modal, setModal } = useTaskManager();
+  const { layout, setLayout, taskEdit, setTaskEdit, modal, setModal } = useTaskManager();
 
   const handleSubmitGrid = () => {
     setLayout('grid');
@@ -21,7 +21,12 @@ const ViewGridList = () => {
 
   const handleNewTask = () => {
     setModal(true);
+    setTaskEdit({});
   };
+
+  useEffect(() => {
+    if (Object.keys(taskEdit).length > 0) setModal(true);
+  }, [taskEdit]);
 
   return (
     <div className="view__flex">

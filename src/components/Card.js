@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getTechColor } from '../helpers/getTechColor';
 import { getColorToDate, getDate } from '../helpers/getAllAboutDate';
 import { ReactComponent as Clip } from '../assets/clip.svg';
@@ -7,23 +7,31 @@ import { ReactComponent as Comment } from '../assets/comment.svg';
 import { ReactComponent as Ellipsis } from '../assets/ellipsis.svg';
 import { ReactComponent as Clock } from '../assets/clock.svg';
 import { splitWords } from '../helpers/splitWords';
+import Selection from './Selection';
+import useTaskManager from '../hooks/useTaskManager';
 import estimates from '../helpers/estimates';
 
 import './Card.scss';
 
 function Card({ task, layout }) {
   const { name, estimate, dueDate, tags, user, id } = task;
-
+  const { idSelectedEdit } = useTaskManager();
+  const [selection, setSelection] = useState(false);
   const initials = splitWords(user.fullName);
 
   const updateSelection = () => {
-    console.log('Selection');
+    setSelection(!selection);
   };
+
+  useEffect(() => {
+    setSelection(`task-${id}` === idSelectedEdit);
+  }, [id, idSelectedEdit]);
 
   return (
     <>
       {layout === 'grid' && (
         <div className="card">
+          {selection && <Selection setSelection={setSelection} task={task} />}
           <div className="card__title">
             <p className="card_p">{name}</p>
             <Ellipsis id={`task-${id}`} onClick={updateSelection} className="card__ellipsis" />
@@ -67,6 +75,7 @@ function Card({ task, layout }) {
 
       {layout === 'list' && (
         <div className="card__list">
+          {selection && <Selection setSelection={setSelection} task={task} />}
           <div className="card__list__title border">
             <p className="card_p">{name}</p>
             <div className="card__icons__list">
