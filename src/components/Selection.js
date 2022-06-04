@@ -39,7 +39,7 @@ const Selection = ({ task, setSelection }) => {
             <p>Edit</p>
           </button>
           <button type="button" onClick={() => handleDelete()} className="selection__button">
-            <Trash />
+            <Trash className="selection__delete" />
             <p>Delete</p>
           </button>
         </div>

@@ -11,6 +11,8 @@
   right: 3rem;
   top: 3rem;
   background-color: v.$neutral-color-3;
+  border: 1px solid v.$neutral-color-2;
+  border-radius: 5px;
   gap: 0.5rem 0;
 
   p{
@@ -25,9 +27,12 @@
   justify-content: center;
   align-items: center;
   background-color: v.$neutral-color-3;
+  border: 1px solid v.$neutral-color-2;
+  border-radius: 5px;
+
   width: 8rem;
   height: 6rem;
-  right: 4rem;
+  right: 8rem;
   z-index: 5;
   gap: 0.5rem 0;
   p{
@@ -42,7 +47,10 @@
   width: 7rem;
   background-color: rgb(70,70,70);
   color: v.$neutral-color-1;
-  border-radius: 3px;
-  border: 1px solid v.$neutral-color-2;
   cursor: pointer;
+  border: none;
+}
+
+.selection__delete{
+  margin-right: 0.5rem;
 }

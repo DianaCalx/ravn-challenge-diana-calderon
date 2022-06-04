@@ -108,7 +108,7 @@ function Card({ task, layout }) {
             <p>{user.fullName}</p>
           </div>
 
-          <div className="card__identifier__list border">
+          <div className="card__date__list border">
             <div className={`card_p ${getColorToDate(dueDate)}`}>{getDate(dueDate)}</div>
           </div>
 
