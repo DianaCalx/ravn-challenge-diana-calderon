@@ -7,7 +7,7 @@ import './Modal.scss';
 
 const Modal = ({ setModal }) => {
   const [mensaje, setMensaje] = useState('');
-  const { estimates, users, labels, status } = myJson;
+  const { estimates, users, tags, status } = myJson;
 
   const [data, setData] = useState({
     name: '',
@@ -69,16 +69,16 @@ const Modal = ({ setModal }) => {
 
   const LabelOption = ({ option }) => {
     const handleClick = e => {
-      const oldLabels = data.label;
+      const oldtags = data.label;
       if (e.target.checked) {
         setData({
           ...data,
-          label: [...oldLabels, option],
+          label: [...oldtags, option],
         });
       } else {
         setData({
           ...data,
-          label: oldLabels.filter(label => label !== option),
+          label: oldtags.filter(label => label !== option),
         });
       }
     };
@@ -136,11 +136,11 @@ const Modal = ({ setModal }) => {
               disabledOption="Assignee To..."
             />
             <Dropdown
-              options={labels}
+              options={tags}
               OptionComponent={LabelOption}
               trigger={
                 <div className="modal__dropdown__trigger">
-                  <span>{data.label.includes(labels) || 'Label'}</span>
+                  <span>{data.label.includes(tags) || 'Label'}</span>
                 </div>
               }
               disabledOption="Tag Title"

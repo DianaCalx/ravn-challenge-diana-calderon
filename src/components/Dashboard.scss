@@ -1,3 +1,5 @@
+@use '../styles/variables' as v;
+
 .dashboard {  
   width: 100%;
   display: flex;
@@ -12,4 +14,73 @@
   padding-right: 2rem;
   display: flex;
   flex-direction: column;
+}
+
+.dashboard__main{
+  flex: 1;
+  width: 100%;
+  overflow-x: scroll;
+  position: relative;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0, .2);
+  }
+  &::-webkit-scrollbar-thumb:hover,
+  &::-webkit-scrollbar-thumb:active {
+    background-color: rgba(0,0,0, .3);
+  }
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0, .1);
+  }
+}
+
+.dashboard__columns{
+  width: max-content;
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  color: v.$neutral-color-1;
+  font-size: 1.4rem;
+}
+
+.dashboard__main__list{
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0, .2);
+  }
+  &::-webkit-scrollbar-thumb:hover,
+  &::-webkit-scrollbar-thumb:active {
+    background-color: rgba(0,0,0, .3);
+  }
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0, .1);
+  }
+}
+
+.dashboard__lists{
+  color: v.$neutral-color-1;
+  font-size: 1.4rem;
+}
+
+.dashboard__list{
+  h2{
+    margin: 0;
+    padding-top: 2rem;
+    padding-bottom: 0.2rem;
+  }
+
+  border-radius:5px;
+  background-color: v.$neutral-color-4;
+  margin-bottom: 2rem;
+  border: 0.5px solid rgba(v.$neutral-color-1, 0.1);
 }
