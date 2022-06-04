@@ -158,7 +158,7 @@ const Modal = ({ setModal }) => {
             <input className="modal__date" type="date" name="due_date" value={data.due_date} onChange={e => handleChangedata(e)} />
           </div>
           <div className="modal__buttons">
-            <button onClick={hideModal} className="modal__close">
+            <button type="button" onClick={hideModal} className="modal__close">
               Cancel
             </button>
             <input type="submit" value="Create" className="modal__submit" />

@@ -26,14 +26,14 @@ const ViewGridList = () => {
   return (
     <div className="view__flex">
       <div className="view__mode">
-        <button className={classNames('view__button', { active: layout === 'list' })} onClick={() => handleSubmitList()}>
+        <button type="button" className={classNames('view__button', { active: layout === 'list' })} onClick={() => handleSubmitList()}>
           <List className="view__icon view__icon-bar" />
         </button>
-        <button className={classNames('view__button', { active: layout === 'grid' })} onClick={() => handleSubmitGrid()}>
+        <button type="button" className={classNames('view__button', { active: layout === 'grid' })} onClick={() => handleSubmitGrid()}>
           <Grid className="view__icon" />
         </button>
       </div>
-      <button className="view__button-plus" onClick={handleNewTask}>
+      <button type="button" className="view__button-plus" onClick={handleNewTask}>
         <Plus className="view__icon" />
       </button>
 

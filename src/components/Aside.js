@@ -23,11 +23,11 @@ const Aside = () => {
     <div className="aside__main">
       <div className="aside__content">
         <Logo className="aside__logo" />
-        <button className={classNames('aside__buttons', { active: layout === 'grid' })} onClick={handleSubmitGrid}>
+        <button type="button" className={classNames('aside__buttons', { active: layout === 'grid' })} onClick={handleSubmitGrid}>
           <Grid className="aside__button" />
           <div>Dashboard</div>
         </button>
-        <button className={classNames('aside__buttons', { active: layout === 'list' })} onClick={handleSubmitList}>
+        <button type="button" className={classNames('aside__buttons', { active: layout === 'list' })} onClick={handleSubmitList}>
           <List className="aside__button" />
           <div>My Task</div>
         </button>
