@@ -1,0 +1,48 @@
+@use '../styles/variables' as v;
+
+.selection{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 8rem;
+  height: 6rem;
+  right: 3rem;
+  top: 3rem;
+  background-color: v.$neutral-color-3;
+  gap: 0.5rem 0;
+
+  p{
+    margin: 0;
+  }
+}
+
+.selection__list{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: v.$neutral-color-3;
+  width: 8rem;
+  height: 6rem;
+  right: 4rem;
+  z-index: 5;
+  gap: 0.5rem 0;
+  p{
+    margin: 0;
+  }
+}
+
+.selection__button{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 7rem;
+  background-color: rgb(70,70,70);
+  color: v.$neutral-color-1;
+  border-radius: 3px;
+  border: 1px solid v.$neutral-color-2;
+  cursor: pointer;
+}
