@@ -4,10 +4,9 @@
         "es2021": true
     },
     "extends": [
-        "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:prettier/recommended",
-        "airbnb"
+        "airbnb",
+        "prettier"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -17,10 +16,10 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "prettier"
     ],
     "rules": {
-        "react/react-in-jsx-scope": "off",
         "prettier/prettier": [
             "error",
             {
@@ -35,22 +34,59 @@
             }
               
         ],
-        "react/jsx-filename-extension": [
-            1,
+        "import/extensions": [
+            "error",
+            "always",
             {
-                "extensions": [".js", ".jsx"]
+                "js": "never",
+                "jsx": "never"
             }
         ],
-        "arrow-parens": 0,
-        "react/function-component-definition": 0,
-        "linebreak-style": 0,
-        "arrow-body-style": 0,
-        "import/prefer-default-export": 0, 
-        "no-plusplus": 0,
+        "react/jsx-filename-extension": [
+            1,
+            { "extensions": [".js", ".jsx"] }
+        ],
+        "no-unused-vars": "warn",
+        "react/jsx-indent": [0],
+        "react/react-in-jsx-scope": 0,
+        "react/jsx-indent-props": [2, 2],
+        "react/jsx-props-no-spreading": "off",
+        "no-use-before-define": [0],
+        "react/display-name": 0,
         "react/prop-types": 0,
-        "no-console": 0,
-        "react/button-has-type": 0,
-        "react/jsx-no-constructed-context-values": 0
+        "no-console": 1,
+        "import/prefer-default-export": 0,
+        "react/jsx-no-constructed-context-values": 0,
+        "no-shadow": 1,
+        "prefer-const": 1,
+        "prefer-spread": 1,
+        "no-unused-expressions": [
+            "error",
+            { "allowShortCircuit": true, "allowTernary": true }
+        ],
+        "no-return-assign": "off",
+        "no-underscore-dangle": "off",
+        "react/require-default-props": [2, { "ignoreFunctionalComponents": true }],
+        "no-param-reassign": [
+            "error",
+            { "props": true, "ignorePropertyModificationsFor": ["state"] }
+        ],
+        "jsx-a11y/label-has-associated-control": ["error", {
+            "required": {
+                "some": ["nesting", "id"]
+            }
+        }],
+        "jsx-a11y/label-has-for": ["error", {
+            "required": {
+                "some": ["nesting", "id"]
+            }
+        }],
+        "react/function-component-definition": 0,
+        "react/no-unstable-nested-components": 0,
+        "react/no-array-index-key": 0,
+        "jsx-a11y/click-events-have-key-events": 0,
+        "jsx-a11y/interactive-supports-focus": 0,
+        "jsx-a11y/no-static-element-interactions": 0
     },
     "settings": {
         "import/resolver": {
