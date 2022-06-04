@@ -5,6 +5,7 @@ import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from './SearchBar';
 import Aside from './Aside';
 import ViewGridList from './ViewGridList';
+import Card from './Card';
 import useTaskManager from '../hooks/useTaskManager';
 import myJson from '../data.json';
 
@@ -21,7 +22,7 @@ const Dashboard = () => {
         {tasks
           .filter(task => task.status === sta.name)
           .map(task => (
-            <p>{task.name}</p>
+            <Card key={`task-${task.id}`} task={task} layout={layout} />
           ))}
       </Collapsible>
     );
@@ -51,7 +52,7 @@ const Dashboard = () => {
                   {tasks
                     .filter(task => task.status === sta.name)
                     .map(task => (
-                      <p>{task.name}</p>
+                      <Card key={`task-${task.id}`} task={task} layout={layout} />
                     ))}
                 </div>
               ))}
