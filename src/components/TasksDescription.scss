@@ -1,0 +1,37 @@
+@use '../styles/variables' as v;
+
+.tasks__description__list{
+  display: flex;
+  width: calc(100% - 8px);
+  background-color: v.$neutral-color-4;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  border: 0.5px solid rgba(v.$neutral-color-1, 0.1);
+
+  p{
+    margin: 0;
+    color: v.$neutral-color-1;
+    padding: 0.5rem;
+    border-right: 0.5px solid rgba(v.$neutral-color-1, 0.1);
+  }
+}
+
+.tasks__tname{
+  width: 30%;
+}
+
+.tasks__tags{
+  width: 15%;
+}
+
+.tasks__testimage{
+  width: 10%;
+}
+
+.tasks__tassing{
+  width: 25%;
+}
+
+.tasks__tdate{
+  width: 20%;
+}
