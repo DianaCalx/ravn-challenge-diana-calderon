@@ -38,6 +38,17 @@
   }
 }
 
+.dashboard__column{
+  h2{
+    margin: 0;
+    padding-bottom: 2rem;
+  }
+  width: 35rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+
 .dashboard__columns{
   width: max-content;
   display: flex;
@@ -83,4 +94,11 @@
   background-color: v.$neutral-color-4;
   margin-bottom: 2rem;
   border: 0.5px solid rgba(v.$neutral-color-1, 0.1);
+}
+
+.dashboard__header{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 0.5rem;
 }

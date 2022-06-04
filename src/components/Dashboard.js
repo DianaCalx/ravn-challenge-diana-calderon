@@ -18,7 +18,7 @@ const Dashboard = () => {
   const Panel = ({ sta }) => {
     const [isOpen, setIsOpen] = useState(true);
     return (
-      <Collapsible open={true} onTriggerOpening={() => setIsOpen(true)} onTriggerClosing={() => setIsOpen(false)} trigger={<Header isOpen={isOpen} name={<div>{sta.name}</div>} />}>
+      <Collapsible open onTriggerOpening={() => setIsOpen(true)} onTriggerClosing={() => setIsOpen(false)} trigger={<Header isOpen={isOpen} name={<div>{sta.name}</div>} />}>
         {tasks
           .filter(task => task.status === sta.name)
           .map(task => (
@@ -28,14 +28,12 @@ const Dashboard = () => {
     );
   };
 
-  const Header = ({ isOpen, name }) => {
-    return (
-      <div className="dashboard__header">
-        {!isOpen ? <FontAwesomeIcon icon={faCaretDown} /> : <FontAwesomeIcon icon={faCaretUp} />}
-        <span>{name}</span>
-      </div>
-    );
-  };
+  const Header = ({ isOpen, name }) => (
+    <div className="dashboard__header">
+      {!isOpen ? <FontAwesomeIcon icon={faCaretDown} /> : <FontAwesomeIcon icon={faCaretUp} />}
+      <span>{name}</span>
+    </div>
+  );
 
   return (
     <div className="dashboard">
