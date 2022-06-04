@@ -1,0 +1,10 @@
+.custom-dropdown {
+  &__options-container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(60, 60, 60);
+    padding: 10px;
+    width: max-content;
+    border-radius: 5px;
+  }
+}
