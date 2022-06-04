@@ -1,0 +1,178 @@
+@use '../styles/variables' as v;
+
+.card{
+  background-color: v.$neutral-color-4; 
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.card__list{  
+  display: flex;
+}
+
+.border {
+  border-top: 1px solid rgba(174, 174, 174, 0.351);
+  border-right: 1px solid rgba(174, 174, 174, 0.351);
+}
+
+.card__list__title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width:30%;
+  border-top: 1px solid rgba(174, 174, 174, 0.351);
+}
+
+.card__button__ellipsis{
+  border-top: 1px solid rgba(174, 174, 174, 0.351);
+  color: rgb(174, 174, 174);
+  width: 5%;
+}
+
+.card_p{
+  margin: 0.5rem;
+}
+
+.card__quantity{
+  background-color: rgba(v.$neutral-color-2,0.1);
+  padding: 0.5rem;
+  margin: 0;
+  border-radius: 0.5rem;
+}
+
+.card__title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.6rem;
+}
+
+.card__ellipsis, .card__ellipsis__list {
+  border: none;
+  background-color: v.$neutral-color-4;
+  cursor: pointer;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0.8rem;
+}
+
+.card__ellipsis__list{
+  width: 4%;
+}
+
+.card__data{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.6rem;
+}
+
+.card__data__list{
+  width: 10%;
+}
+
+.card__tech{
+  font-weight: bold;
+  border-radius: 3px;
+  margin: 0;
+  position: relative;
+  > div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 3px;
+  }
+}
+.card__date{
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  padding: 0 0.3rem;
+  border-radius: 3px;
+
+  svg path {
+    fill: currentColor;
+  }
+}
+.card__date__white{
+  color: v.$neutral-color-1;  
+  background-color: rgba(v.$neutral-color-1, 0.1);
+}
+
+.card__date__yellow{
+  color: v.$tertiary-color-4;  
+  background-color: rgba(v.$tertiary-color-4, 0.1);
+}
+
+.card__date__red{
+  color: v.$primary-color-4;
+  background-color: rgba(v.$primary-color-4, 0.1);
+}
+
+
+.card__date__list{
+  padding: 0;
+  width: 15%;
+  position: relative;
+  text-align: center;
+}
+
+.card__labels, .card__labels__list{
+  display: flex;
+  gap: 0.2rem;
+  padding: 0.8rem 0;
+  height: 100%;
+}
+
+.card__labels__list{
+  width:15%;
+  display: flex;
+  justify-content: center;
+}
+
+.card__icons,
+.card__icon {
+  display: flex;
+  align-items: center;
+}
+
+.card__identifier__list{
+  display: flex;
+  align-items: center;
+  width: 25%;
+  gap: 1rem;
+  padding-left: 0.5rem;
+  p{
+    margin: 0;
+  }
+}
+
+.card__icons__list{
+  display: flex;
+  margin-right: 1rem;
+}
+
+.card__iniciales{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: rgb(0, 149, 255);
+  font-weight: bold;
+}
+
+.card__identifier{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card__icons{
+  gap: 1rem;
+}
