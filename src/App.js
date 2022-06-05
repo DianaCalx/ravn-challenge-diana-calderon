@@ -1,10 +1,12 @@
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/client';
 import Dashboard from './components/Dashboard';
 import Settings from './components/Settings';
 import { TasKManagerProvider } from './context/TaskManagerProvider';
+import client from './graphql/apolloConfig';
 
-const App = () => {
-  return (
+const App = () => (
+  <ApolloProvider client={client}>
     <TasKManagerProvider>
       <Router>
         <Routes>
@@ -13,7 +15,7 @@ const App = () => {
         </Routes>
       </Router>
     </TasKManagerProvider>
-  );
-};
+  </ApolloProvider>
+);
 
 export default App;
