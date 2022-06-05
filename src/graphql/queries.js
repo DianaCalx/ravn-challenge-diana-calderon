@@ -16,9 +16,11 @@ export const getProfile = gql`
 
 export const getUsers = gql`
   query getUsers {
-    avatar
-    fullName
-    id
+    users {
+      avatar
+      fullName
+      id
+    }
   }
 `;
 
