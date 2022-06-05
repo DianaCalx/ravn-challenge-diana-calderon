@@ -1,48 +1,65 @@
 import { createContext, useState } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import { getProfile, getUsers, getTasks } from '../graphql/queries';
+import { createTask, updateTask, deleteTask } from '../graphql/mutations';
 
 const TaskManagerContext = createContext();
 
 const TasKManagerProvider = ({ children }) => {
-  const [layout, setLayout] = useState('grid');
-  const [searchText, setSearchText] = useState('');
-  const [modal, setModal] = useState(false);
   const [idSelectedEdit, setIdSelectedEdit] = useState('');
-  const [taskEdit, setTaskEdit] = useState({});
-  const [del, setDel] = useState({});
+  const [layout, setLayout] = useState('grid');
+  const [modal, setModal] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [taskEdit, setTaskEdit] = useState(undefined);
 
-  const handleEliminar = del => {
-    const confirmar = window.confirm('¿Deseas eliminar este cliente?');
+  const { data: profileData, loading: profileLoading, error: profileError } = useQuery(getProfile);
+  const { data: usersData, loading: usersLoading, error: usersError } = useQuery(getUsers);
+  const {
+    data: tasksData,
+    loading: tasksLoading,
+    error: taskError,
+    refetch,
+  } = useQuery(getTasks, {
+    variables: {
+      filters: {},
+    },
+  });
+
+  const deleteTask = taskId => {
+    const confirmar = window.confirm('Are you sure that you want to delete this task?');
 
     if (confirmar) {
-      console.log('Eliminado');
+      console.log('Deleted');
     }
-    setDel(undefined);
+    refetch();
   };
 
   const saveTask = task => {
     if (task.id) {
-      console.log('Guardar tarea editada');
+      console.log('Task updated');
     } else {
-      console.log('Guardar tarea neava');
+      console.log('Task created');
     }
+    refetch();
   };
 
   return (
     <TaskManagerContext.Provider
       value={{
-        layout,
-        setLayout,
-        searchText,
-        setSearchText,
-        modal,
-        setModal,
+        profile: profileData?.profile,
+        users: usersData?.users || [],
+        tasks: tasksData?.tasks || [],
         idSelectedEdit,
-        setIdSelectedEdit,
-        del,
-        setDel,
-        handleEliminar,
-        saveTask,
+        layout,
+        modal,
+        searchText,
         taskEdit,
+        deleteTask,
+        saveTask,
+        setIdSelectedEdit,
+        setLayout,
+        setModal,
+        setSearchText,
         setTaskEdit,
       }}
     >
