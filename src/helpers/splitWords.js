@@ -1,4 +1,7 @@
 export const splitWords = string => {
+  if (!string) {
+    return '';
+  }
   const array = string.toString().split(' ');
   const { length } = array;
   let result = '';

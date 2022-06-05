@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 export const getColorToDate = dueDate => {
-  const momenObject = moment(`${dueDate}`).format('YYYY-MM-DD');
+  const momenObject = moment(`${dueDate.split('T')[0]}`).format('YYYY-MM-DD');
   const diffDays = moment(momenObject).diff(moment(new Date()).format('YYYY-MM-DD'), 'days');
 
   if (diffDays > 1) {
@@ -14,7 +14,7 @@ export const getColorToDate = dueDate => {
 };
 
 export const getDate = dueDate => {
-  const momenObject = moment(`${dueDate}`).format('YYYY-MM-DD');
+  const momenObject = moment(`${dueDate.split('T')[0]}`).format('YYYY-MM-DD');
   const diffDays = moment(momenObject).diff(moment(new Date()).format('YYYY-MM-DD'), 'days');
 
   if (diffDays > 1) {
