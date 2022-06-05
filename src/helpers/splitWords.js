@@ -6,5 +6,5 @@ export const splitWords = string => {
   for (let i = 0; i < length; i++) {
     result += array[i][0];
   }
-  return result;
+  return result.slice(0, 2);
 };
