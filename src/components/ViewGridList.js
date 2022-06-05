@@ -21,7 +21,6 @@ const ViewGridList = () => {
 
   const handleNewTask = () => {
     setModal(true);
-    setTaskEdit(undefined);
   };
 
   useEffect(() => {
@@ -42,7 +41,7 @@ const ViewGridList = () => {
         <Plus className="view__icon" />
       </button>
 
-      {modal && <Modal setModal={setModal} />}
+      {modal && <Modal />}
     </div>
   );
 };

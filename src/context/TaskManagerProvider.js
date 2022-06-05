@@ -24,23 +24,42 @@ const TasKManagerProvider = ({ children }) => {
       filters: {},
     },
   });
+  const [createTaskMutation] = useMutation(createTask);
+  const [updateTaskMutation] = useMutation(updateTask);
+  const [deleteTaskMutation] = useMutation(deleteTask);
 
-  const deleteTask = taskId => {
-    const confirmar = window.confirm('Are you sure that you want to delete this task?');
+  const removeTask = async taskId => {
+    const confirm = window.confirm('Are you sure that you want to delete this task?');
 
-    if (confirmar) {
-      console.log('Deleted');
+    if (confirm) {
+      await deleteTaskMutation({
+        variables: {
+          task: {
+            id: taskId,
+          },
+        },
+      });
     }
     refetch();
   };
 
-  const saveTask = task => {
+  const saveTask = async task => {
     if (task.id) {
-      console.log('Task updated');
+      await updateTaskMutation({
+        variables: {
+          task,
+        },
+      });
+      setTaskEdit(undefined);
     } else {
-      console.log('Task created');
+      await createTaskMutation({
+        variables: {
+          task,
+        },
+      });
     }
     refetch();
+    setModal(false);
   };
 
   return (
@@ -54,7 +73,7 @@ const TasKManagerProvider = ({ children }) => {
         modal,
         searchText,
         taskEdit,
-        deleteTask,
+        removeTask,
         saveTask,
         setIdSelectedEdit,
         setLayout,

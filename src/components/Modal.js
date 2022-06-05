@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { ReactComponent as MoreLess } from '../assets/bell.svg';
 import { ReactComponent as Avatar } from '../assets/human.svg';
+import { ReactComponent as Tag } from '../assets/tag.svg';
 import useTaskManager from '../hooks/useTaskManager';
 import Dropdown from './Dropdown';
 import data from '../data';
 import './Modal.scss';
 
-const Modal = ({ setModal }) => {
-  const [mensaje, setMensaje] = useState('');
+const Modal = () => {
+  const [error, setError] = useState('');
   const { estimates, status, tags } = data;
 
-  const { users, saveTask, taskEdit, setTaskEdit } = useTaskManager();
+  const { users, saveTask, taskEdit, setTaskEdit, setModal } = useTaskManager();
 
   const [task, setTask] = useState({
     name: '',
@@ -30,7 +31,7 @@ const Modal = ({ setModal }) => {
         assigneeId: taskEdit.assignee.id,
         tags: taskEdit.tags,
         status: taskEdit.status,
-        dueDate: taskEdit.dueDate,
+        dueDate: taskEdit.dueDate.split('T')[0],
       });
     }
   }, []);
@@ -43,34 +44,30 @@ const Modal = ({ setModal }) => {
   };
 
   const hideModal = () => {
+    setTaskEdit(undefined);
     setModal(false);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    if ([task.name, task.estimate, task.user, task.tags, task.status, task.dueDate].includes('')) {
-      setMensaje('All fields are required');
+    if ([task.name, task.pointEstimate, task.assigneeId, task.status, task.dueDate].includes('') || !task.tags.length) {
+      setError('All fields are required');
       setTimeout(() => {
-        setMensaje('');
+        setError('');
       }, 3000);
       return;
     }
 
-    if (task.id) {
-      setTaskEdit(undefined);
-    }
-
-    saveTask(task);
-
     setTask({
       name: '',
-      estimate: '',
-      user: '',
-      tags: '',
+      pointEstimate: '',
+      assigneeId: '',
+      tags: [],
       status: '',
       dueDate: '',
     });
-    setModal(false);
+
+    saveTask(task);
   };
 
   const EstimateOption = ({ option }) => {
@@ -78,7 +75,7 @@ const Modal = ({ setModal }) => {
     const handleClick = () => {
       setTask({
         ...task,
-        estimate: value,
+        pointEstimate: value,
       });
     };
     return (
@@ -89,7 +86,7 @@ const Modal = ({ setModal }) => {
     );
   };
 
-  const tagsOption = ({ option }) => {
+  const TagsOption = ({ option }) => {
     const handleClick = e => {
       const oldtags = task.tags;
       if (e.target.checked) {
@@ -118,7 +115,7 @@ const Modal = ({ setModal }) => {
     const handleClick = () => {
       setTask({
         ...task,
-        user: option,
+        assigneeId: option.id,
       });
     };
     return (
@@ -131,7 +128,7 @@ const Modal = ({ setModal }) => {
 
   return (
     <div className="modal">
-      <form className="modal__form" onSubmit={e => handleSubmit(e)}>
+      <form className="modal__form" onSubmit={handleSubmit}>
         <div className="modal__rec">
           <input name="name" type="text" placeholder="Task title" className="modal__input" value={task.name} onChange={handleChange} />
           <div className="modal__options">
@@ -159,10 +156,11 @@ const Modal = ({ setModal }) => {
             />
             <Dropdown
               options={tags}
-              OptionComponent={tagsOption}
+              OptionComponent={TagsOption}
               trigger={
                 <div className="modal__dropdown__trigger">
-                  <span>{task.tags.includes(tags) || 'Labels'}</span>
+                  {!task.tags.length && <Tag />}
+                  <span>{task.tags[0] || 'Labels'}</span>
                 </div>
               }
               disabledOption="Tag Title"
@@ -183,10 +181,10 @@ const Modal = ({ setModal }) => {
             <button type="button" onClick={hideModal} className="modal__close">
               Cancel
             </button>
-            <input type="submit" value="Create" className="modal__submit" />
+            <input type="submit" value={task.id ? 'Update' : 'Create'} className="modal__submit" />
           </div>
         </div>
-        {mensaje ? <div className="modal__error">{mensaje}</div> : null}
+        {error ? <div className="modal__error">{error}</div> : null}
       </form>
     </div>
   );

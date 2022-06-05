@@ -6,7 +6,7 @@ import { ReactComponent as Trash } from '../assets/trashCan.svg';
 import './Selection.scss';
 
 const Selection = ({ task, setSelection }) => {
-  const { setTaskEdit, setModal, deleteTask, layout } = useTaskManager();
+  const { setTaskEdit, setModal, removeTask, layout } = useTaskManager();
   const handleEdit = () => {
     setTaskEdit(task);
     setModal(true);
@@ -14,7 +14,7 @@ const Selection = ({ task, setSelection }) => {
   };
 
   const handleDelete = () => {
-    deleteTask(task.id);
+    removeTask(task.id);
   };
 
   return (
