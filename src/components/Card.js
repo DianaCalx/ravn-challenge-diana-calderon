@@ -9,15 +9,16 @@ import { ReactComponent as Clock } from '../assets/clock.svg';
 import { splitWords } from '../helpers/splitWords';
 import Selection from './Selection';
 import useTaskManager from '../hooks/useTaskManager';
-import estimates from '../helpers/estimates';
+import data from '../data';
 
 import './Card.scss';
 
 function Card({ task, layout }) {
-  const { name, estimate, dueDate, tags, user, id } = task;
+  const { estimates } = data;
+  const { name, pointEstimate, dueDate, tags, assignee, id } = task;
   const { idSelectedEdit } = useTaskManager();
   const [selection, setSelection] = useState(false);
-  const initials = splitWords(user.fullName);
+  const initials = splitWords(assignee.fullName);
 
   const updateSelection = () => {
     setSelection(!selection);
@@ -38,7 +39,7 @@ function Card({ task, layout }) {
           </div>
 
           <div className="card__data">
-            <p className="card_p">{estimates.find(est => est.value === estimate).name}</p>
+            <p className="card_p">{estimates.find(est => est.value === pointEstimate)?.name}</p>
             <div className={`card__date ${getColorToDate(dueDate)}`}>
               <Clock />
               <p className="card_p">{getDate(dueDate)}</p>
@@ -100,12 +101,12 @@ function Card({ task, layout }) {
           </div>
 
           <div className="card__data__list border">
-            <p className="card_p">{estimates.find(est => est.value === estimate).name}</p>
+            <p className="card_p">{estimates.find(est => est.value === pointEstimate)?.name}</p>
           </div>
 
           <div className="card__identifier__list border">
             <p className="card__iniciales card_p">{initials}</p>
-            <p>{user.fullName}</p>
+            <p>{assignee.fullName}</p>
           </div>
 
           <div className="card__date__list border">

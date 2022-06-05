@@ -1,22 +1,15 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
 import { splitWords } from '../helpers/splitWords';
 import { getDate } from '../helpers/getAllAboutDate';
-import { getProfile } from '../graphql/queries';
+import useTaskManager from '../hooks/useTaskManager';
 import './Settings.scss';
 
 const Settings = () => {
-  const { data, loading, error } = useQuery(getProfile);
+  const { profile } = useTaskManager();
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  if (!profile) return null;
 
-  if (error) {
-    return <div>There was an error</div>;
-  }
-
-  const { avatar, fullName, type, email, createdAt, updatedAt } = data.profile;
+  const { avatar, fullName, type, email, createdAt, updatedAt } = profile;
 
   return (
     <div className="settings">

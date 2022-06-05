@@ -21,11 +21,11 @@ const ViewGridList = () => {
 
   const handleNewTask = () => {
     setModal(true);
-    setTaskEdit({});
+    setTaskEdit(undefined);
   };
 
   useEffect(() => {
-    if (Object.keys(taskEdit).length > 0) setModal(true);
+    if (taskEdit) setModal(true);
   }, [taskEdit]);
 
   return (

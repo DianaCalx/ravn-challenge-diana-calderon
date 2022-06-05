@@ -8,13 +8,13 @@ import ViewGridList from './ViewGridList';
 import TasksDescription from './TasksDescription';
 import Card from './Card';
 import useTaskManager from '../hooks/useTaskManager';
-import myJson from '../data.json';
+import data from '../data';
 
 import './Dashboard.scss';
 
 const Dashboard = () => {
-  const { status, tasks } = myJson;
-  const { layout, setIdSelectedEdit } = useTaskManager();
+  const { status } = data;
+  const { layout, setIdSelectedEdit, tasks } = useTaskManager();
 
   useEffect(() => {
     window.addEventListener('click', e => {
@@ -30,9 +30,9 @@ const Dashboard = () => {
   const Panel = ({ sta }) => {
     const [isOpen, setIsOpen] = useState(true);
     return (
-      <Collapsible open onTriggerOpening={() => setIsOpen(true)} onTriggerClosing={() => setIsOpen(false)} trigger={<Header isOpen={isOpen} name={<div>{sta.name}</div>} />}>
+      <Collapsible open onTriggerOpening={() => setIsOpen(true)} onTriggerClosing={() => setIsOpen(false)} trigger={<Header isOpen={isOpen} name={<div>{sta}</div>} />}>
         {tasks
-          .filter(task => task.status === sta.name)
+          .filter(task => task.status === sta)
           .map(task => (
             <Card key={`task-${task.id}`} task={task} layout={layout} />
           ))}
@@ -56,11 +56,11 @@ const Dashboard = () => {
         {layout === 'grid' && (
           <div className="dashboard__main">
             <div className="dashboard__columns">
-              {status.map((sta, index) => (
-                <div key={`status -${index}`} className="dashboard__column">
-                  <h2>{sta.name}</h2>
+              {status.map(sta => (
+                <div key={`grid-${sta}`} className="dashboard__column">
+                  <h2>{sta}</h2>
                   {tasks
-                    .filter(task => task.status === sta.name)
+                    .filter(task => task.status === sta)
                     .map(task => (
                       <Card key={`task-${task.id}`} task={task} layout={layout} />
                     ))}
@@ -74,8 +74,8 @@ const Dashboard = () => {
             <TasksDescription />
             <div className="dashboard__main__list">
               <div className="dashboard__lists">
-                {status.map((sta, index) => (
-                  <div key={index} className="dashboard__list">
+                {status.map(sta => (
+                  <div key={`list-${sta}`} className="dashboard__list">
                     <Panel sta={sta} />
                   </div>
                 ))}

@@ -3,32 +3,31 @@ import { ReactComponent as MoreLess } from '../assets/bell.svg';
 import { ReactComponent as Avatar } from '../assets/human.svg';
 import useTaskManager from '../hooks/useTaskManager';
 import Dropdown from './Dropdown';
-import myJson from '../data.json';
-import estimates from '../helpers/estimates';
+import data from '../data';
 import './Modal.scss';
 
 const Modal = ({ setModal }) => {
   const [mensaje, setMensaje] = useState('');
-  const { users, tags, status } = myJson;
+  const { estimates, status, tags } = data;
 
-  const { saveTask, taskEdit, setTaskEdit } = useTaskManager();
+  const { users, saveTask, taskEdit, setTaskEdit } = useTaskManager();
 
-  const [data, setData] = useState({
+  const [task, setTask] = useState({
     name: '',
-    estimate: '',
-    user: {},
+    pointEstimate: '',
+    assigneeId: '',
     tags: [],
     status: '',
     dueDate: '',
   });
 
   useEffect(() => {
-    if (Object.keys(taskEdit).length > 0) {
-      setData({
+    if (taskEdit) {
+      setTask({
         id: taskEdit.id,
         name: taskEdit.name,
-        estimate: taskEdit.estimate,
-        user: taskEdit.user,
+        pointEstimate: taskEdit.pointEstimate,
+        assigneeId: taskEdit.assignee.id,
         tags: taskEdit.tags,
         status: taskEdit.status,
         dueDate: taskEdit.dueDate,
@@ -36,9 +35,9 @@ const Modal = ({ setModal }) => {
     }
   }, []);
 
-  const handleChangedata = e => {
-    setData({
-      ...data,
+  const handleChange = e => {
+    setTask({
+      ...task,
       [e.target.name]: e.target.value,
     });
   };
@@ -49,7 +48,7 @@ const Modal = ({ setModal }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if ([data.name, data.estimate, data.user, data.tags, data.status, data.dueDate].includes('')) {
+    if ([task.name, task.estimate, task.user, task.tags, task.status, task.dueDate].includes('')) {
       setMensaje('All fields are required');
       setTimeout(() => {
         setMensaje('');
@@ -57,13 +56,13 @@ const Modal = ({ setModal }) => {
       return;
     }
 
-    if (data.id) {
-      setTaskEdit({});
+    if (task.id) {
+      setTaskEdit(undefined);
     }
 
-    saveTask(data);
+    saveTask(task);
 
-    setData({
+    setTask({
       name: '',
       estimate: '',
       user: '',
@@ -77,8 +76,8 @@ const Modal = ({ setModal }) => {
   const EstimateOption = ({ option }) => {
     const { name, value } = option;
     const handleClick = () => {
-      setData({
-        ...data,
+      setTask({
+        ...task,
         estimate: value,
       });
     };
@@ -92,22 +91,22 @@ const Modal = ({ setModal }) => {
 
   const tagsOption = ({ option }) => {
     const handleClick = e => {
-      const oldtags = data.tags;
+      const oldtags = task.tags;
       if (e.target.checked) {
-        setData({
-          ...data,
+        setTask({
+          ...task,
           tags: [...oldtags, option],
         });
       } else {
-        setData({
-          ...data,
-          tags: oldtags.filter(tags => tags !== option),
+        setTask({
+          ...task,
+          tags: oldtags.filter(tag => tag !== option),
         });
       }
     };
     return (
       <div>
-        <input id={option} type="checkbox" value={option} onChange={handleClick} checked={data.tags.includes(option)} />
+        <input id={option} type="checkbox" value={option} onChange={handleClick} checked={task.tags.includes(option)} />
         <label className="checkbox__tags" htmlFor={option}>
           {option}
         </label>
@@ -117,8 +116,8 @@ const Modal = ({ setModal }) => {
 
   const UserOption = ({ option }) => {
     const handleClick = () => {
-      setData({
-        ...data,
+      setTask({
+        ...task,
         user: option,
       });
     };
@@ -134,7 +133,7 @@ const Modal = ({ setModal }) => {
     <div className="modal">
       <form className="modal__form" onSubmit={e => handleSubmit(e)}>
         <div className="modal__rec">
-          <input name="name" type="text" placeholder="Task title" className="modal__input" value={data.name} onChange={e => handleChangedata(e)} />
+          <input name="name" type="text" placeholder="Task title" className="modal__input" value={task.name} onChange={handleChange} />
           <div className="modal__options">
             <Dropdown
               options={estimates}
@@ -142,7 +141,7 @@ const Modal = ({ setModal }) => {
               trigger={
                 <div className="modal__dropdown__trigger">
                   <MoreLess />
-                  <span>{estimates.find(estimate => estimate.value === data.estimate)?.name || 'Estimate'}</span>
+                  <span>{estimates.find(estimate => estimate.value === task.pointEstimate)?.name || 'Estimate'}</span>
                 </div>
               }
               disabledOption="Estimate"
@@ -153,7 +152,7 @@ const Modal = ({ setModal }) => {
               trigger={
                 <div className="modal__dropdown__trigger">
                   <Avatar />
-                  <span>{users.find(user => user.id === data.user.id)?.fullName || 'Assignee'}</span>
+                  <span>{users.find(user => user.id === task.assigneeId)?.fullName || 'Assignee'}</span>
                 </div>
               }
               disabledOption="Assignee To..."
@@ -163,22 +162,22 @@ const Modal = ({ setModal }) => {
               OptionComponent={tagsOption}
               trigger={
                 <div className="modal__dropdown__trigger">
-                  <span>{data.tags.includes(tags) || 'Label'}</span>
+                  <span>{task.tags.includes(tags) || 'Labels'}</span>
                 </div>
               }
               disabledOption="Tag Title"
             />
-            <select className="modal__select" name="status" value={data.status} onChange={e => handleChangedata(e)}>
+            <select className="modal__select" name="status" value={task.status} onChange={handleChange}>
               <option disabled value="">
                 Status
               </option>
-              {status.map(st => (
-                <option key={st.name} value={st.name}>
-                  {st.name}
+              {status.map(sta => (
+                <option key={sta} value={sta}>
+                  {sta}
                 </option>
               ))}
             </select>
-            <input className="modal__date" type="date" name="dueDate" value={data.dueDate} onChange={e => handleChangedata(e)} />
+            <input className="modal__date" type="date" name="dueDate" value={task.dueDate} onChange={handleChange} />
           </div>
           <div className="modal__buttons">
             <button type="button" onClick={hideModal} className="modal__close">
