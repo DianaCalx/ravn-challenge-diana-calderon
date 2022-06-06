@@ -29,6 +29,9 @@ const Filters = () => {
     navigate('/settings');
   };
 
+  const assigneeUser = users.find(u => u.id === filters?.assigneeId);
+  const assigneeUserFilter = option => users.find(u => u.id === option?.id);
+
   const EstimateOption = ({ option }) => {
     const { name, value } = option;
     const handleClick = () => {
@@ -45,6 +48,33 @@ const Filters = () => {
       >
         <MoreLess />
         <span>{name}</span>
+      </div>
+    );
+  };
+
+  const UserOption = ({ option }) => {
+    const handleClick = () => {
+      setFilters({
+        ...filters,
+        assigneeId: option.id,
+      });
+    };
+    return (
+      <div
+        className="filter__component"
+        role="button"
+        onClick={handleClick}
+      >
+        {assigneeUserFilter(option).avatar ? (
+          <img
+            src={assigneeUserFilter(option).avatar}
+            alt="Filter user avatar"
+            width="20px"
+          />
+        ) : (
+          <div>{splitWords(assigneeUserFilter(option)?.fullName)} </div>
+        )}
+        <span>{option.fullName}</span>
       </div>
     );
   };
@@ -79,25 +109,6 @@ const Filters = () => {
         >
           {option}
         </label>
-      </div>
-    );
-  };
-
-  const UserOption = ({ option }) => {
-    const handleClick = () => {
-      setFilters({
-        ...filters,
-        assigneeId: option.id,
-      });
-    };
-    return (
-      <div
-        className="modal__component"
-        role="button"
-        onClick={handleClick}
-      >
-        <Avatar />
-        <span>{option.fullName}</span>
       </div>
     );
   };
@@ -155,8 +166,18 @@ const Filters = () => {
             OptionComponent={UserOption}
             trigger={
               <div className="filters__dropdown__trigger">
-                <Avatar />
-                <span>{users.find(user => user.id === filters?.assigneeId)?.fullName || 'Assignee'}</span>
+                {assigneeUser?.avatar ? (
+                  <img
+                    src={assigneeUser.avatar}
+                    alt="User avatar"
+                    width={20}
+                  />
+                ) : assigneeUser?.avatar === null ? (
+                  <span>{splitWords(assigneeUser?.fullName)}</span>
+                ) : (
+                  <Avatar />
+                )}
+                <span>{assigneeUser?.fullName || 'Assignee'}</span>
               </div>
             }
             disabledOption="Assignee To..."

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { ReactComponent as MoreLess } from '../assets/moreless.svg';
-import { ReactComponent as Avatar } from '../assets/human.svg';
 import { ReactComponent as Tag } from '../assets/tag.svg';
 import { splitWords } from '../helpers/splitWords';
 import useTaskManager from '../hooks/useTaskManager';
