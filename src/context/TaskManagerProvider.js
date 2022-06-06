@@ -1,7 +1,8 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { getProfile, getUsers, getTasks } from '../graphql/queries';
 import { createTask, updateTask, deleteTask } from '../graphql/mutations';
+import useDebounce from '../hooks/useDebounce';
 
 const TaskManagerContext = createContext();
 
@@ -9,7 +10,7 @@ const TasKManagerProvider = ({ children }) => {
   const [idSelectedEdit, setIdSelectedEdit] = useState('');
   const [layout, setLayout] = useState('grid');
   const [modal, setModal] = useState(false);
-  const [searchText, setSearchText] = useState('');
+  const [filters, setFilters] = useState(undefined);
   const [taskEdit, setTaskEdit] = useState(undefined);
 
   const { data: profileData, loading: profileLoading, error: profileError } = useQuery(getProfile);
@@ -28,6 +29,12 @@ const TasKManagerProvider = ({ children }) => {
   const [updateTaskMutation] = useMutation(updateTask);
   const [deleteTaskMutation] = useMutation(deleteTask);
 
+  useEffect(() => {
+    if (!tasksLoading) {
+      debounce();
+    }
+  }, [filters]);
+
   const removeTask = async taskId => {
     const confirm = window.confirm('Are you sure that you want to delete this task?');
 
@@ -40,7 +47,7 @@ const TasKManagerProvider = ({ children }) => {
         },
       });
     }
-    refetch();
+    getFilteredTask();
   };
 
   const saveTask = async task => {
@@ -58,9 +65,23 @@ const TasKManagerProvider = ({ children }) => {
         },
       });
     }
-    refetch();
+    getFilteredTask();
     setModal(false);
   };
+
+  const getFilteredTask = () => {
+    if (!filters) {
+      refetch({
+        filters: {},
+      });
+    } else {
+      refetch({
+        filters,
+      });
+    }
+  };
+
+  const debounce = useDebounce(getFilteredTask);
 
   return (
     <TaskManagerContext.Provider
@@ -71,15 +92,16 @@ const TasKManagerProvider = ({ children }) => {
         idSelectedEdit,
         layout,
         modal,
-        searchText,
+        filters,
         taskEdit,
         removeTask,
         saveTask,
         setIdSelectedEdit,
         setLayout,
         setModal,
-        setSearchText,
+        setFilters,
         setTaskEdit,
+        refetch,
       }}
     >
       {children}

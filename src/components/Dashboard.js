@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Collapsible from 'react-collapsible';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import SearchBar from './SearchBar';
+import Filters from './Filters';
 import Aside from './Aside';
 import ViewGridList from './ViewGridList';
 import TasksDescription from './TasksDescription';
@@ -51,7 +51,7 @@ const Dashboard = () => {
     <div className="dashboard">
       <Aside />
       <div className="dashboard__content">
-        <SearchBar />
+        <Filters />
         <ViewGridList />
         {layout === 'grid' && (
           <div className="dashboard__main">
