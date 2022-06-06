@@ -24,17 +24,36 @@ const Dashboard = () => {
         setIdSelectedEdit('');
       }
     });
-    return () => window.removeEventListener('click', e => {});
+    return () => window.removeEventListener('click', () => {});
   }, []);
 
   const Panel = ({ sta }) => {
     const [isOpen, setIsOpen] = useState(true);
     return (
-      <Collapsible open onTriggerOpening={() => setIsOpen(true)} onTriggerClosing={() => setIsOpen(false)} trigger={<Header isOpen={isOpen} name={<div>{sta}</div>} />}>
+      <Collapsible
+        open
+        onTriggerOpening={() => setIsOpen(true)}
+        onTriggerClosing={() => setIsOpen(false)}
+        trigger={
+          <Header
+            isOpen={isOpen}
+            name={
+              <div>
+                {`${sta} `}
+                <span>({tasks.filter(task => task.status === sta).length})</span>
+              </div>
+            }
+          />
+        }
+      >
         {tasks
           .filter(task => task.status === sta)
           .map(task => (
-            <Card key={`task-${task.id}`} task={task} layout={layout} />
+            <Card
+              key={`task-${task.id}`}
+              task={task}
+              layout={layout}
+            />
           ))}
       </Collapsible>
     );
@@ -57,12 +76,22 @@ const Dashboard = () => {
           <div className="dashboard__main">
             <div className="dashboard__columns">
               {status.map(sta => (
-                <div key={`grid-${sta}`} className="dashboard__column">
-                  <h2>{sta}</h2>
+                <div
+                  key={`grid-${sta}`}
+                  className="dashboard__column"
+                >
+                  <h2>
+                    {`${sta} `}
+                    <span>({tasks.filter(task => task.status === sta).length})</span>
+                  </h2>
                   {tasks
                     .filter(task => task.status === sta)
                     .map(task => (
-                      <Card key={`task-${task.id}`} task={task} layout={layout} />
+                      <Card
+                        key={`task-${task.id}`}
+                        task={task}
+                        layout={layout}
+                      />
                     ))}
                 </div>
               ))}
@@ -75,7 +104,10 @@ const Dashboard = () => {
             <div className="dashboard__main__list">
               <div className="dashboard__lists">
                 {status.map(sta => (
-                  <div key={`list-${sta}`} className="dashboard__list">
+                  <div
+                    key={`list-${sta}`}
+                    className="dashboard__list"
+                  >
                     <Panel sta={sta} />
                   </div>
                 ))}

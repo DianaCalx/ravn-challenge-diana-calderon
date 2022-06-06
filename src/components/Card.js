@@ -32,10 +32,19 @@ function Card({ task, layout }) {
     <>
       {layout === 'grid' && (
         <div className="card">
-          {selection && <Selection setSelection={setSelection} task={task} />}
+          {selection && (
+            <Selection
+              setSelection={setSelection}
+              task={task}
+            />
+          )}
           <div className="card__title">
             <p className="card_p">{name}</p>
-            <Ellipsis id={`task-${id}`} onClick={updateSelection} className="card__ellipsis" />
+            <Ellipsis
+              id={`task-${id}`}
+              onClick={updateSelection}
+              className="card__ellipsis"
+            />
           </div>
 
           <div className="card__data">
@@ -48,9 +57,15 @@ function Card({ task, layout }) {
 
           <div className="card__labels">
             {tags.map(label => (
-              <div key={label} className="card__tech">
+              <div
+                key={label}
+                className="card__tech"
+              >
                 <div style={{ backgroundColor: getTechColor(label), opacity: 0.3 }} />
-                <p className="card_p" style={{ color: getTechColor(label) }}>
+                <p
+                  className="card_p"
+                  style={{ color: getTechColor(label) }}
+                >
                   {label}
                 </p>
               </div>
@@ -76,7 +91,12 @@ function Card({ task, layout }) {
 
       {layout === 'list' && (
         <div className="card__list">
-          {selection && <Selection setSelection={setSelection} task={task} />}
+          {selection && (
+            <Selection
+              setSelection={setSelection}
+              task={task}
+            />
+          )}
           <div className="card__list__title border">
             <p className="card_p">{name}</p>
             <div className="card__icons__list">
@@ -93,7 +113,10 @@ function Card({ task, layout }) {
           <div className="card__labels__list border">
             <div className="card__tech">
               <div style={{ backgroundColor: getTechColor(tags[0]), opacity: 0.3 }} />
-              <p className="card_p" style={{ color: getTechColor(tags[0]) }}>
+              <p
+                className="card_p"
+                style={{ color: getTechColor(tags[0]) }}
+              >
                 {tags[0]}
               </p>
             </div>
@@ -114,7 +137,11 @@ function Card({ task, layout }) {
           </div>
 
           <div className="card__button__ellipsis">
-            <Ellipsis id={`task-${id}`} onClick={updateSelection} className="card__ellipsis" />
+            <Ellipsis
+              id={`task-${id}`}
+              onClick={updateSelection}
+              className="card__ellipsis"
+            />
           </div>
         </div>
       )}

@@ -14,7 +14,14 @@ const Settings = () => {
   return (
     <div className="settings">
       <div className="settings__card">
-        {avatar ? <img alt="User avatar" src={avatar} /> : <div className="settings__itials">{splitWords(fullName)}</div>}
+        {avatar ? (
+          <img
+            alt="User avatar"
+            src={avatar}
+          />
+        ) : (
+          <div className="settings__itials">{splitWords(fullName)}</div>
+        )}
         <p className="settings__fullName settings__data">{fullName}</p>
         <p className="settings__type">{type}</p>
         <p className="settings__data">{email}</p>

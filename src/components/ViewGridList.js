@@ -9,7 +9,7 @@ import { ReactComponent as Plus } from '../assets/plus.svg';
 import './ViewGridList.scss';
 
 const ViewGridList = () => {
-  const { layout, setLayout, taskEdit, setTaskEdit, modal, setModal } = useTaskManager();
+  const { layout, setLayout, taskEdit, modal, setModal } = useTaskManager();
 
   const handleSubmitGrid = () => {
     setLayout('grid');
@@ -30,14 +30,26 @@ const ViewGridList = () => {
   return (
     <div className="view__flex">
       <div className="view__mode">
-        <button type="button" className={classNames('view__button', { active: layout === 'list' })} onClick={() => handleSubmitList()}>
+        <button
+          type="button"
+          className={classNames('view__button', { active: layout === 'list' })}
+          onClick={() => handleSubmitList()}
+        >
           <List className="view__icon view__icon-bar" />
         </button>
-        <button type="button" className={classNames('view__button', { active: layout === 'grid' })} onClick={() => handleSubmitGrid()}>
+        <button
+          type="button"
+          className={classNames('view__button', { active: layout === 'grid' })}
+          onClick={() => handleSubmitGrid()}
+        >
           <Grid className="view__icon" />
         </button>
       </div>
-      <button type="button" className="view__button-plus" onClick={handleNewTask}>
+      <button
+        type="button"
+        className="view__button-plus"
+        onClick={handleNewTask}
+      >
         <Plus className="view__icon" />
       </button>
 

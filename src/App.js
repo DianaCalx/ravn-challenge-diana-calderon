@@ -10,8 +10,14 @@ const App = () => (
     <TasKManagerProvider>
       <Router>
         <Routes>
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/" element={<Dashboard />} />
+          <Route
+            path="/settings"
+            element={<Settings />}
+          />
+          <Route
+            path="/"
+            element={<Dashboard />}
+          />
         </Routes>
       </Router>
     </TasKManagerProvider>

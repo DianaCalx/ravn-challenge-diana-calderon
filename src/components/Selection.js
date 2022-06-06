@@ -19,11 +19,19 @@ const Selection = ({ task, setSelection }) => {
 
   return (
     <div className={classNames({ selection: layout === 'grid', selection__list: layout === 'list' })}>
-      <button type="button" onClick={handleEdit} className="selection__button">
+      <button
+        type="button"
+        onClick={handleEdit}
+        className="selection__button"
+      >
         <Pencil className="selection__delete" />
         <p>Edit</p>
       </button>
-      <button type="button" onClick={handleDelete} className="selection__button">
+      <button
+        type="button"
+        onClick={handleDelete}
+        className="selection__button"
+      >
         <Trash className="selection__delete" />
         <p>Delete</p>
       </button>

@@ -12,7 +12,10 @@ const Dropdown = ({ options, OptionComponent, trigger, disabledOption, dropdownO
     <div className="custom-dropdown__options-container">
       <div className="custom-dropdown__disabled-option">{disabledOption}</div>
       {options.map((option, index) => (
-        <OptionComponent key={`${index}-${option.name}`} option={option} />
+        <OptionComponent
+          key={`${index}-${option.name}`}
+          option={option}
+        />
       ))}
     </div>
   </Collapsible>

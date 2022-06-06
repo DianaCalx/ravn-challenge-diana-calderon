@@ -38,7 +38,11 @@ const Filters = () => {
       });
     };
     return (
-      <div className="modal__component" role="button" onClick={handleClick}>
+      <div
+        className="filter__component"
+        role="button"
+        onClick={handleClick}
+      >
         <MoreLess />
         <span>{name}</span>
       </div>
@@ -62,8 +66,17 @@ const Filters = () => {
     };
     return (
       <div>
-        <input id={`filter-${option}`} type="checkbox" value={option} onChange={handleClick} checked={filters?.tags?.includes(option)} />
-        <label className="checkbox__tags" htmlFor={`filter-${option}`}>
+        <input
+          id={`filter-${option}`}
+          type="checkbox"
+          value={option}
+          onChange={handleClick}
+          checked={filters?.tags?.includes(option)}
+        />
+        <label
+          className="checkbox__tags"
+          htmlFor={`filter-${option}`}
+        >
           {option}
         </label>
       </div>
@@ -78,7 +91,11 @@ const Filters = () => {
       });
     };
     return (
-      <div className="modal__component" role="button" onClick={handleClick}>
+      <div
+        className="modal__component"
+        role="button"
+        onClick={handleClick}
+      >
         <Avatar />
         <span>{option.fullName}</span>
       </div>
@@ -93,67 +110,110 @@ const Filters = () => {
   return (
     <div className="filters">
       <div className="searchbar">
-        <label htmlFor="values" className="searchbar__label">
+        <label
+          htmlFor="values"
+          className="searchbar__label"
+        >
           <Search className="searchbar__icon" />
         </label>
-        <input className="searchbar__input" type="text" placeholder="Search" id="values" name="name" value={filters?.name} onChange={handleInputChange} />
+        <input
+          className="searchbar__input"
+          type="text"
+          placeholder="Search"
+          id="values"
+          name="name"
+          value={filters?.name}
+          onChange={handleInputChange}
+        />
         <Bell className="searchbar__icon" />
-        <div className="searchbar__logout" onClick={navigateToUser}>
+        <div
+          className="searchbar__logout"
+          onClick={navigateToUser}
+        >
           {splitWords(profile?.fullName)}
         </div>
       </div>
-      <div className="modal__options">
-        <Dropdown
-          options={estimates}
-          OptionComponent={EstimateOption}
-          trigger={
-            <div className="modal__dropdown__trigger">
-              <MoreLess />
-              <span>{estimates.find(estimate => estimate.value === filters?.pointEstimate)?.name || 'Estimate'}</span>
-            </div>
-          }
-          disabledOption="Estimate"
-          dropdownOpen={dropdownOpen}
-          setDropdownOpen={setDropdownOpen}
-        />
-        <Dropdown
-          options={users}
-          OptionComponent={UserOption}
-          trigger={
-            <div className="modal__dropdown__trigger">
-              <Avatar />
-              <span>{users.find(user => user.id === filters?.assigneeId)?.fullName || 'Assignee'}</span>
-            </div>
-          }
-          disabledOption="Assignee To..."
-          dropdownOpen={dropdownOpen}
-          setDropdownOpen={setDropdownOpen}
-        />
-        <Dropdown
-          options={tags}
-          OptionComponent={TagsOption}
-          trigger={
-            <div className="modal__dropdown__trigger">
-              {!filters?.tags?.length && <Tag />}
-              <span>{(filters?.tags && filters?.tags[0]) || 'Labels'}</span>
-            </div>
-          }
-          disabledOption="Tag Title"
-          dropdownOpen={dropdownOpen}
-          setDropdownOpen={setDropdownOpen}
-        />
-        <select className="modal__select" defaultValue="" name="status" value={filters?.status || ''} onChange={handleInputChange}>
-          <option disabled value="">
+      <div className="filters__options">
+        <div className="filter__estimate">
+          <Dropdown
+            options={estimates}
+            OptionComponent={EstimateOption}
+            trigger={
+              <div className="filters__dropdown__trigger">
+                <MoreLess />
+                <span>{estimates.find(estimate => estimate.value === filters?.pointEstimate)?.name || 'Estimate'}</span>
+              </div>
+            }
+            disabledOption="Estimate"
+            dropdownOpen={dropdownOpen}
+            setDropdownOpen={setDropdownOpen}
+          />
+        </div>
+        <div className="filter__user">
+          <Dropdown
+            options={users}
+            OptionComponent={UserOption}
+            trigger={
+              <div className="filters__dropdown__trigger">
+                <Avatar />
+                <span>{users.find(user => user.id === filters?.assigneeId)?.fullName || 'Assignee'}</span>
+              </div>
+            }
+            disabledOption="Assignee To..."
+            dropdownOpen={dropdownOpen}
+            setDropdownOpen={setDropdownOpen}
+          />
+        </div>
+        <div className="filter__tags">
+          <Dropdown
+            options={tags}
+            OptionComponent={TagsOption}
+            trigger={
+              <div className="filters__dropdown__trigger">
+                {!filters?.tags?.length && <Tag />}
+                <span>{(filters?.tags && filters?.tags[0]) || 'Labels'}</span>
+              </div>
+            }
+            disabledOption="Tag Title"
+            dropdownOpen={dropdownOpen}
+            setDropdownOpen={setDropdownOpen}
+          />
+        </div>
+        <select
+          className="filter__select"
+          defaultValue=""
+          name="status"
+          value={filters?.status || ''}
+          onChange={handleInputChange}
+        >
+          <option
+            disabled
+            value=""
+          >
             Status
           </option>
           {status.map(sta => (
-            <option key={sta} value={sta}>
+            <option
+              key={sta}
+              value={sta}
+            >
               {sta}
             </option>
           ))}
         </select>
-        <input className="modal__date" type="date" name="dueDate" value={filters?.dueDate} onChange={handleInputChange} />
-        <input type="button" value="Clear filters" onClick={handleClear} />
+        <input
+          className="filter__date"
+          type="date"
+          name="dueDate"
+          value={filters?.dueDate}
+          onChange={handleInputChange}
+        />
+        <input
+          type="button"
+          value="Clear filters"
+          onClick={handleClear}
+          className="filter__clear"
+        />
       </div>
     </div>
   );
