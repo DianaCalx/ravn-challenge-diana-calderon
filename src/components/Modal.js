@@ -10,7 +10,7 @@ import './Modal.scss';
 const Modal = () => {
   const [error, setError] = useState('');
   const { estimates, status, tags } = data;
-
+  const [dropdownOpen, setDropdownOpen] = useState();
   const { users, saveTask, taskEdit, setTaskEdit, setModal } = useTaskManager();
 
   const [task, setTask] = useState({
@@ -142,6 +142,8 @@ const Modal = () => {
                 </div>
               }
               disabledOption="Estimate"
+              dropdownOpen={dropdownOpen}
+              setDropdownOpen={setDropdownOpen}
             />
             <Dropdown
               options={users}
@@ -153,6 +155,8 @@ const Modal = () => {
                 </div>
               }
               disabledOption="Assignee To..."
+              dropdownOpen={dropdownOpen}
+              setDropdownOpen={setDropdownOpen}
             />
             <Dropdown
               options={tags}
@@ -164,6 +168,8 @@ const Modal = () => {
                 </div>
               }
               disabledOption="Tag Title"
+              dropdownOpen={dropdownOpen}
+              setDropdownOpen={setDropdownOpen}
             />
             <select className="modal__select" name="status" value={task.status} onChange={handleChange}>
               <option disabled value="">
