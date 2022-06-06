@@ -1,8 +1,10 @@
+@use '../styles/variables' as v;
+
 .custom-dropdown {
   &__options-container {
     display: flex;
     flex-direction: column;
-    background-color: rgb(60, 60, 60);
+    background-color: v.$neutral-color-4;
     padding: 10px;
     width: max-content;
     border-radius: 5px;

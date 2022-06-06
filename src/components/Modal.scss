@@ -133,3 +133,15 @@
 .Collapsible {
   color: #fff !important;
 }
+
+.modal__dropdown__avatar{
+  width: 3rem;
+  border-radius: 50%;
+}
+
+.without__avatar{
+  background-color: v.$secondary-color-4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
