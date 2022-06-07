@@ -58,6 +58,8 @@ const Modal = () => {
       return;
     }
 
+    saveTask(task);
+
     setTask({
       name: '',
       pointEstimate: '',
@@ -66,8 +68,6 @@ const Modal = () => {
       status: '',
       dueDate: '',
     });
-
-    saveTask(task);
   };
 
   const EstimateOption = ({ option }) => {

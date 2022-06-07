@@ -69,10 +69,10 @@ const Filters = () => {
           <img
             src={assigneeUserFilter(option).avatar}
             alt="Filter user avatar"
-            width="20px"
+            className="user__option__img"
           />
         ) : (
-          <div>{splitWords(assigneeUserFilter(option)?.fullName)} </div>
+          <div className="user__split__img">{splitWords(assigneeUserFilter(option)?.fullName)} </div>
         )}
         <span>{option.fullName}</span>
       </div>
@@ -133,7 +133,7 @@ const Filters = () => {
           placeholder="Search"
           id="values"
           name="name"
-          value={filters?.name}
+          value={filters?.name || ''}
           onChange={handleInputChange}
         />
         <Bell className="searchbar__icon" />
@@ -173,7 +173,7 @@ const Filters = () => {
                     width={20}
                   />
                 ) : assigneeUser?.avatar === null ? (
-                  <span>{splitWords(assigneeUser?.fullName)}</span>
+                  <span className="user__split__img">{splitWords(assigneeUser?.fullName)}</span>
                 ) : (
                   <Avatar />
                 )}
@@ -202,7 +202,6 @@ const Filters = () => {
         </div>
         <select
           className="filter__select"
-          defaultValue=""
           name="status"
           value={filters?.status || ''}
           onChange={handleInputChange}
