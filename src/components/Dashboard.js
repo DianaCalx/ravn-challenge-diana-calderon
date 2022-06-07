@@ -96,6 +96,7 @@ const Dashboard = () => {
                 </div>
               ))}
             </div>
+            {!tasks.length && <div className="no__result">There are no tasks</div>}
           </div>
         )}
         {layout === 'list' && (
@@ -112,6 +113,7 @@ const Dashboard = () => {
                   </div>
                 ))}
               </div>
+              {!tasks.length && <div className="no__result">There are no tasks</div>}
             </div>
           </>
         )}
