@@ -29,7 +29,8 @@ Task management app allows you to browse and add tasks to users.
 ## Additional Information
 
 Set `REACT_APP_BACKEND_URL` variable in the `.env` file with [Backend Direct Endpoint](https://syn-api-prod.herokuapp.com/graphql).\
-Set `REACT_APP_ACCESS_TOKEN` variable in the `.env` file with the user profile token.
+Set `REACT_APP_ACCESS_TOKEN` variable in the `.env` file with the user profile token.\
+**Deploy to production** [https://ravn-challenge-diana-calderon.netlify.app/](https://ravn-challenge-diana-calderon.netlify.app/).
 
 ## Technologies
 
