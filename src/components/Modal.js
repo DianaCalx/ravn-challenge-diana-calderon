@@ -165,6 +165,7 @@ const Modal = () => {
             type="text"
             placeholder="Task title"
             className="modal__input"
+            autoComplete="off"
             value={task.name}
             onChange={handleChange}
           />

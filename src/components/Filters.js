@@ -19,10 +19,14 @@ const Filters = () => {
   const [dropdownOpen, setDropdownOpen] = useState();
 
   const handleInputChange = e => {
-    setFilters({
-      ...filters,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.value) {
+      setFilters({
+        ...filters,
+        [e.target.name]: e.target.value,
+      });
+    } else {
+      setFilters(undefined);
+    }
   };
 
   const navigateToUser = () => {
@@ -133,6 +137,7 @@ const Filters = () => {
           placeholder="Search"
           id="values"
           name="name"
+          autoComplete="off"
           value={filters?.name || ''}
           onChange={handleInputChange}
         />
