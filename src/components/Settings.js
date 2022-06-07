@@ -2,12 +2,13 @@ import React from 'react';
 import { splitWords } from '../helpers/splitWords';
 import { getDate } from '../helpers/getAllAboutDate';
 import useTaskManager from '../hooks/useTaskManager';
+import Spinner from './Spinner';
 import './Settings.scss';
 
 const Settings = () => {
-  const { profile } = useTaskManager();
+  const { profile, profileLoading } = useTaskManager();
 
-  if (!profile) return null;
+  if (profileLoading) return <Spinner />;
 
   const { avatar, fullName, type, email, createdAt, updatedAt } = profile;
 
