@@ -24,7 +24,7 @@ Task management app allows you to browse and add tasks to users.
 ![Add new task](https://github.com/DianaCalx/ravn-challenge-diana-calderon/blob/master/public/addnewtask.gif?raw=true)
 ![Edit task](https://github.com/DianaCalx/ravn-challenge-diana-calderon/blob/master/public/edittask.gif?raw=true)
 ![Filter task](https://github.com/DianaCalx/ravn-challenge-diana-calderon/blob/master/public/filtertask.gif?raw=true)
-![Delete task](https://github.com/DianaCalx/ravn-challenge-diana-calderon/blob/master/public/delettask.gif?raw=true)
+![Delete task](https://github.com/DianaCalx/ravn-challenge-diana-calderon/blob/master/public/deletetask.gif?raw=true)
 
 ## Additional Information
 
